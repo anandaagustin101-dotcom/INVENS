@@ -15,7 +15,7 @@
                          fill="#7367F0" />
                  </svg>
              </span>
-             <span class="app-brand-text demo menu-text fw-bold">Guests App</span>
+             <span class="app-brand-text demo menu-text fw-bold">Inventaris</span>
          </a>
 
          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -29,28 +29,36 @@
      <ul class="menu-inner py-1">
          <li class="menu-item">
              <a href="{{ route('home') }}" class="menu-link">
-                 <i class="menu-icon tf-icons ti ti-home"></i>
+                <i class="menu-icon tf-icons ti ti-home"></i>
                  Dashboard
              </a>
          </li>
 
+                  <li class="menu-item">
+             <a href="{{ route('data-barang.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-package"></i>
+                 Data Barang
+             </a>
+         </li>
+
+
          <li class="menu-item">
-             <a href="{{ route('daftar-tamu.index') }}" class="menu-link">
-                 <i class="menu-icon tf-icons ti ti-users-group"></i>
+             <a href="{{ route('barang-masuk.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons ti ti-package-import"></i>
                  Barang Masuk
              </a>
          </li>
 
          <li class="menu-item">
-             <a href="{{ route('karyawan.index') }}" class="menu-link">
-                 <i class="menu-icon tf-icons ti ti-apps-off"></i>
-                 Data Barang
+             <a href="{{ route('barang-keluar.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons ti ti-package-export"></i>
+                 Barang Keluar
              </a>
          </li>
 
          <li class="menu-item">
              <a href="{{ route('admin.index') }}" class="menu-link">
-                 <i class="menu-icon tf-icons ti ti-users"></i>
+                 <i class="menu-icon tf-icons ti ti-user-star"></i>
                  Admin
              </a>
          </li>
