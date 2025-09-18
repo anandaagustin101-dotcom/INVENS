@@ -48,12 +48,12 @@
             </div>
 
             <div class="d-flex gap-2 mt-3">
-                <a href="{{ route('data-barang.index') }}" class="btn btn-secondary">
+                <a href="{{ route('databarang.index') }}" class="btn btn-secondary">
                     <span class="ti ti-arrow-left me-1"></span>
                     Kembali
                 </a>
 
-                <a href="{{ route('data-barang.edit', $databarang->id) }}" class="btn btn-primary">
+                <a href="{{ route('databarang.edit', $databarang->id) }}" class="btn btn-primary">
                     <span class="ti ti-pencil me-1"></span>
                     Edit
                 </a>

@@ -17,14 +17,9 @@ class DataBarang extends Model
 
     ];
 
-    public function Databarang()
-    {
-        return $this->hasMany(Databarang::class);
-    }
-
     public function BarangMasuk()
     {
-        return $this->hasMany(BarangMasuk::class, 'databarang');
+        return $this->hasMany(BarangMasuk::class, 'databarang_id', 'id');
     }
 
     

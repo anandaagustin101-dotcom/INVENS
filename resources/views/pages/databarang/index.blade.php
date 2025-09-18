@@ -8,7 +8,7 @@
             <h3 class="page-title">Data Barang</h3>
 
             
-                <a href="{{ route('data-barang.create') }}" class="btn btn-primary mb-3">
+                <a href="{{ route('databarang.create') }}" class="btn btn-primary mb-3">
                     <span class="ti ti-plus me-1"></span>
                     Tambah
                 </a>
@@ -32,15 +32,15 @@
                                     <td>{{ $item->kode}}</td>
                                     <td>{{ $item->jumlah}}</td>
                                     <td>
-                                        <a href="{{ route('data-barang.show',$item->id) }}" class="btn btn-sm btn-info">
+                                        <a href="{{ route('databarang.show',$item->id) }}" class="btn btn-sm btn-info">
                                             <span class="ti ti-eye"></span>
                                         </a>
 
-                                        <a href="{{ route('data-barang.edit',$item->id) }}" class="btn btn-sm btn-warning">
+                                        <a href="{{ route('databarang.edit',$item->id) }}" class="btn btn-sm btn-warning">
                                             <span class="ti ti-pencil"></span>
                                         </a>
 
-                                        <a href="javascript:;" onclick="actionDelete('{{ route('data-barang.destroy', $item->id) }}')" class="btn btn-sm btn-danger">
+                                        <a href="javascript:;" onclick="actionDelete('{{ route('databarang.destroy', $item->id) }}')" class="btn btn-sm btn-danger">
                                             <span class="ti ti-trash"></span>
                                         </a>
                                     </td>

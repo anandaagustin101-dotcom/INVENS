@@ -23,7 +23,7 @@ Route::group([
 
     Route::resource('/barang-keluar', App\Http\Controllers\BarangKeluarController::class);
 
-    Route::resource('/data-barang', App\Http\Controllers\DatabarangController::class);
+    Route::resource('/databarang', App\Http\Controllers\DatabarangController::class);
 
     Route::resource('/admin',App\Http\Controllers\AdminController::class);
 

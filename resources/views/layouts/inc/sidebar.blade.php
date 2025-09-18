@@ -35,7 +35,7 @@
          </li>
 
                   <li class="menu-item">
-             <a href="{{ route('data-barang.index') }}" class="menu-link">
+             <a href="{{ route('databarang.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-package"></i>
                  Data Barang
              </a>

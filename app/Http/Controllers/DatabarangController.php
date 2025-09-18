@@ -10,12 +10,12 @@ class DatabarangController extends Controller
     public function index()
     {
         $databarang = DataBarang::orderBy('nama')->get();
-        return view('pages.data-barang.index', compact('databarang'));
+        return view('pages.databarang.index', compact('databarang'));
     }
 
     public function create()
     {
-        return view('pages.data-barang.create');
+        return view('pages.databarang.create');
     }
 
     public function store(Request $request)
@@ -27,7 +27,7 @@ class DatabarangController extends Controller
         ]);
 
         DataBarang::create($request->all());
-        return redirect()->route('data-barang.index')
+        return redirect()->route('databarang.index')
         ->with('success', 'Data barang berhasil ditambahkan');
 
          BarangMasuk::create($request->all());
@@ -38,13 +38,13 @@ class DatabarangController extends Controller
     public function show(string $id)
     {
         $databarang = DataBarang::findOrFail($id);
-        return view('pages.data-barang.show', compact('databarang'));
+        return view('pages.databarang.show', compact('databarang'));
     }
 
     public function edit(string $id)
     {
         $databarang = DataBarang::findOrFail($id);
-        return view('pages.data-barang.edit', compact('databarang'));
+        return view('pages.databarang.edit', compact('databarang'));
     }
 
     public function update(Request $request, string $id)
@@ -57,7 +57,7 @@ class DatabarangController extends Controller
 
         $databarang = DataBarang::findOrFail($id);
         $databarang->update($request->all());
-        return redirect()->route('data-barang.index')
+        return redirect()->route('databarang.index')
         ->with('success', 'Data barang berhasil diubah');
     }
 
@@ -65,7 +65,7 @@ class DatabarangController extends Controller
     {
         $databarang = DataBarang::findOrFail($id);
         $databarang->delete();
-        return redirect()->route('data-barang.index')
+        return redirect()->route('databarang.index')
         ->with('succes', 'Data barang berhasil dihapus');
     }
 }
