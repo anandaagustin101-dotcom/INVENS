@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BarangMasuk extends Model
+class BarangKeluar extends Model
 {
-    protected $table = 'barangmasuk';
+     protected $table = 'barangkeluar';
 
-    protected $fillable = [
+      protected $fillable = [
         'id',
         'databarang_id',
-        'nama',
-        'kode',
         'jumlah',
         'tanggal',
     ];
@@ -21,4 +19,6 @@ class BarangMasuk extends Model
     {
         return $this->belongsTo(databarang::class, 'databarang_id', 'id');
     }
+
+    
 }

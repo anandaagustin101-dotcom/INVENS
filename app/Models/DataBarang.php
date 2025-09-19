@@ -14,6 +14,7 @@ class DataBarang extends Model
         'nama',
         'kode',
         'jumlah',
+        
 
     ];
 
@@ -22,5 +23,9 @@ class DataBarang extends Model
         return $this->hasMany(BarangMasuk::class, 'databarang_id', 'id');
     }
 
-    
+    public function DataBarang()
+{
+    return $this->belongsTo(DataBarang::class, 'databarang_id', 'id');
+}
+
 }

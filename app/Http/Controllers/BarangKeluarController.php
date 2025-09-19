@@ -1,19 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\BarangMasuk;
+use App\Models\BarangKeluar;
 use App\Models\Databarang;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-
-class BarangMasukController extends Controller
+class BarangKeluarController extends Controller
 {
-    public function index()
+      public function index()
     {
-        $barangmasuk = BarangMasuk::with('databarang')->orderBy('created_at', 'desc')->get();
-        return view('pages.barangmasuk.index', compact('barangmasuk'));
+        $barangkeluar = BarangKeluar::with('databarang')->orderBy('created_at', 'desc')->get();
+        return view('pages.barangkeluar.index', compact('barangkeluar'));
     }
 
     /**
@@ -21,8 +20,8 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        $databarang = databarang::orderBy('nama', 'asc')->get();
-        return view('pages.barangmasuk.create', compact('databarang'));
+        $databarang = Databarang::orderBy('nama', 'asc')->get();
+        return view('pages.barangkeluar.create', compact('databarang'));
     }
 
     /**
@@ -30,23 +29,19 @@ class BarangMasukController extends Controller
      */
     public function store(Request $request)
     {
-        
+    
         $request->validate([
-             'nama' => 'required|min:3|max:255',
-             'kode' => 'required',
+             'databarang_id' =>'required',
              'jumlah' => 'required',
              'tanggal' => 'required',
-             'databarang_id' =>'required',
         ]);
  
-        $barangmasuk = BarangMasuk::create([
+        $barangkeluar = BarangKeluar::create([
             'databarang_id' => $request->databarang_id,
-            'nama' => $request->nama,
-            'kode' => $request->kode,
             'jumlah' => $request->jumlah,
             'tanggal' => $request->tanggal, 
         ]);
-        return redirect()->route('barang-masuk.index', $barangmasuk->id)
+        return redirect()->route('barang-keluar.index')
         ->with('success', 'Barang berhasil ditambahkan!');
     }
 
@@ -55,8 +50,8 @@ class BarangMasukController extends Controller
      */
     public function show(string $id)
     {
-        $barangmasuk = BarangMasuk::find($id);
-        return view('pages.barangmasuk.show', compact('barangmasuk'));
+        $barangkeluar = BarangKeluar::find($id);
+        return view('pages.barangkeluar.show', compact('barangkeluar'));
     }
 
     /**
@@ -65,10 +60,10 @@ class BarangMasukController extends Controller
     public function edit(string $id)
     {
         //MENAMPILKAN FORM EDIT
-        $barangmasuk = BarangMasuk::find($id);
-        $databarang = databarang::orderBy('nama', 'asc')->get();
+        $barangkeluar = BarangKeluar::find($id);
+        $databarang = databarang::orderBy('id', 'asc')->get();
 
-        return view('pages.barangmasuk.edit', compact('barangmasuk', 'databarang'));
+        return view('pages.barangkeluar.edit', compact('barangkeluar', 'databarang'));
 
     }
 
@@ -77,30 +72,27 @@ class BarangMasukController extends Controller
      */
     public function update(Request $request, string $id)
     {
+       
         $request->validate([ 
-            'nama' => 'required|min:3|max:255',
-             'kode' => 'required',
+             'nama' =>'required',
+             'kode' =>'required',
              'jumlah' => 'required',
              'tanggal' => 'required',
-             'databarang_id' =>'required',
              
         ], [
-            'nama.required' => 'Nama harus diisi',
-            'kode.required' => 'Kode harus diisi',
-            'jumlah.required' => 'Jumlah harus diisi', 
-            'databarang_id.required' => 'DataBarang_id harus diisi',       
+            'nama' => 'Nama harus diisi', 
+            'jumlah.required' => 'Jumlah harus diisi',       
         ]);
 
-
-        $barangmasuk->update([
-            'databarang_id' => $request->databarang_id,
+        $barangkeluar=BarangKeluar::findOrFail($id);
+        $barangkeluar->update([
             'nama' => $request->nama,
             'kode' => $request->kode,
             'jumlah' => $request->jumlah,
             'tanggal' => $request->tanggal, 
         ]);
         
-        return redirect()->route('barang-masuk.index');
+        return redirect()->route('barang-keluar.index');
     }
 
     /**
@@ -108,8 +100,7 @@ class BarangMasukController extends Controller
      */
     public function destroy(string $id)
     {
-        $barangmasuk= BarangMasuk::find($id)->delete();
+        $barangkeluar= BarangKeluar::find($id)->delete();
         return redirect()->back();
     }
-
 }
