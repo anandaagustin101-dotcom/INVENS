@@ -8,7 +8,7 @@
             <h3 class="page-title">Tambah Barang</h3>
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('barang-keluar.store') }}" method="POST">
+                    <form action="{{ route('barang-masuk.store') }}" method="POST">
                         @csrf
 
                          
@@ -56,7 +56,7 @@
                                 Simpan
                             </button>
 
-                            <a href="{{ route('barang-keluar.index') }}" class="btn btn-secondary">
+                            <a href="{{ route('barang-masuk.index') }}" class="btn btn-secondary">
                                 Batal
                             </a>
                         </div>

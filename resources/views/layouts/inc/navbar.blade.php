@@ -19,7 +19,7 @@
                     data-bs-toggle="dropdown">
                     <div class="d-flex align-items-center gap-1">
                     <div class="avatar avatar-online">
-                      <img src="{{ asset ('/img/avatars/1.png') }}" alt class="rounded-circle" />
+                      <img src="{{ asset ('/img/avatars/6.png') }}" alt class="rounded-circle" />
                     </div>
                     <span>{{ Auth::user()->name  }}</span>
                     </div>

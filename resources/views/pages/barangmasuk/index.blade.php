@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Barang Keluar')
+@section('title', 'Halaman Barang Masuk')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h3 class="page-title">Barang Keluar</h3>
+            <h3 class="page-title">Barang Masuk</h3>
 
             
-                <a href="{{ route('barang-keluar.create') }}" class="btn btn-primary mb-3">
+                <a href="{{ route('barang-masuk.create') }}" class="btn btn-primary mb-3">
                     <span class="ti ti-plus me-1"></span>
                     Tambah
                 </a>
@@ -25,23 +25,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($barangkeluar as $item)
+                            @foreach ($barangmasuk as $item)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration}}</th>
-                                    <td>{{ $item->databarang->nama ?? '-' }}</td>
-                                    <td>{{ $item->databarang->kode ?? '-' }}</td>
-
+                                    <td>{{ $item->databarang->nama}}</td>
+                                    <td>{{ $item->databarang->kode}}</td>
                                     <td>{{ $item->jumlah}}</td>
                                     <td>
-                                        <a href="{{ route('barang-keluar.show',$item->id) }}" class="btn btn-sm btn-info">
+                                        <a href="{{ route('barang-masuk.show',$item->id) }}" class="btn btn-sm btn-info">
                                             <span class="ti ti-eye"></span>
                                         </a>
 
-                                        <a href="{{ route('barang-keluar.edit',$item->id) }}" class="btn btn-sm btn-warning">
+                                        <a href="{{ route('barang-masuk.edit',$item->id) }}" class="btn btn-sm btn-warning">
                                             <span class="ti ti-pencil"></span>
                                         </a>
 
-                                        <a href="javascript:;" onclick="actionDelete('{{ route('barang-keluar.destroy', $item->id) }}')" class="btn btn-sm btn-danger">
+                                        <a href="javascript:;" onclick="actionDelete('{{ route('barang-masuk.destroy', $item->id) }}')" class="btn btn-sm btn-danger">
                                             <span class="ti ti-trash"></span>
                                         </a>
                                     </td>

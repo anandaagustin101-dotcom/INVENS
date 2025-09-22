@@ -1,106 +1,93 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\BarangKeluar;
 use App\Models\Databarang;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class BarangKeluarController extends Controller
 {
-      public function index()
+    public function index()
     {
         $barangkeluar = BarangKeluar::with('databarang')->orderBy('created_at', 'desc')->get();
         return view('pages.barangkeluar.index', compact('barangkeluar'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $databarang = Databarang::orderBy('nama', 'asc')->get();
         return view('pages.barangkeluar.create', compact('databarang'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-    
         $request->validate([
-             'databarang_id' =>'required',
-             'jumlah' => 'required',
-             'tanggal' => 'required',
+            'databarang_id' => 'required|exists:databarang,id',
+            'jumlah' => 'required|integer|min:1',
+            'tanggal' => 'required|date',
         ]);
- 
-        $barangkeluar = BarangKeluar::create([
-            'databarang_id' => $request->databarang_id,
-            'jumlah' => $request->jumlah,
-            'tanggal' => $request->tanggal, 
-        ]);
+
+        $barang = Databarang::findOrFail($request->databarang_id);
+
+        if ($barang->jumlah < $request->jumlah) {
+            return redirect()->back()->with('error', 'Stok tidak mencukupi!');
+        }
+
+        $barangkeluar = BarangKeluar::create($request->all());
+
+        // Kurangi stok
+        $barang->jumlah -= $request->jumlah;
+        $barang->save();
+
         return redirect()->route('barang-keluar.index')
-        ->with('success', 'Barang berhasil ditambahkan!');
+            ->with('success', 'Barang keluar berhasil ditambahkan dan stok berkurang!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $barangkeluar = BarangKeluar::find($id);
-        return view('pages.barangkeluar.show', compact('barangkeluar'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //MENAMPILKAN FORM EDIT
-        $barangkeluar = BarangKeluar::find($id);
-        $databarang = databarang::orderBy('id', 'asc')->get();
-
-        return view('pages.barangkeluar.edit', compact('barangkeluar', 'databarang'));
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-       
-        $request->validate([ 
-             'nama' =>'required',
-             'kode' =>'required',
-             'jumlah' => 'required',
-             'tanggal' => 'required',
-             
-        ], [
-            'nama' => 'Nama harus diisi', 
-            'jumlah.required' => 'Jumlah harus diisi',       
+        $request->validate([
+            'databarang_id' => 'required|exists:databarang,id',
+            'jumlah' => 'required|integer|min:1',
+            'tanggal' => 'required|date',
         ]);
 
-        $barangkeluar=BarangKeluar::findOrFail($id);
-        $barangkeluar->update([
-            'nama' => $request->nama,
-            'kode' => $request->kode,
-            'jumlah' => $request->jumlah,
-            'tanggal' => $request->tanggal, 
-        ]);
-        
-        return redirect()->route('barang-keluar.index');
+        $barangkeluar = BarangKeluar::findOrFail($id);
+
+        // Balikin stok lama
+        $barangLama = Databarang::findOrFail($barangkeluar->databarang_id);
+        $barangLama->jumlah += $barangkeluar->jumlah;
+        $barangLama->save();
+
+        // Update data
+        $barangkeluar->update($request->all());
+
+        // Kurangi stok baru
+        $barangBaru = Databarang::findOrFail($request->databarang_id);
+
+        if ($barangBaru->jumlah < $request->jumlah) {
+            return redirect()->back()->with('error', 'Stok tidak mencukupi!');
+        }
+
+        $barangBaru->jumlah -= $request->jumlah;
+        $barangBaru->save();
+
+        return redirect()->route('barang-keluar.index')
+            ->with('success', 'Barang keluar berhasil diupdate dan stok otomatis berubah!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $barangkeluar= BarangKeluar::find($id)->delete();
-        return redirect()->back();
+        $barangkeluar = BarangKeluar::findOrFail($id);
+
+        // Balikin stok
+        $barang = Databarang::findOrFail($barangkeluar->databarang_id);
+        $barang->jumlah += $barangkeluar->jumlah;
+        $barang->save();
+
+        $barangkeluar->delete();
+
+        return redirect()->route('barang-keluar.index')
+            ->with('success', 'Barang keluar berhasil dihapus dan stok otomatis dikembalikan!');
     }
 }

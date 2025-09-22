@@ -15,7 +15,7 @@
                          fill="#7367F0" />
                  </svg>
              </span>
-             <span class="app-brand-text demo menu-text fw-bold">Inventaris</span>
+             <span class="app-brand-text demo menu-text fw-bold">Inventify</span>
          </a>
 
          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -29,14 +29,14 @@
      <ul class="menu-inner py-1">
          <li class="menu-item">
              <a href="{{ route('home') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-home"></i>
+               <i class="menu-icon tf-icons ti ti-home-heart"></i>
                  Dashboard
              </a>
          </li>
 
                   <li class="menu-item">
              <a href="{{ route('databarang.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-package"></i>
+                <i class="menu-icon tf-icons ti ti-list-details"></i>
                  Data Barang
              </a>
          </li>
@@ -58,7 +58,7 @@
 
          <li class="menu-item">
              <a href="{{ route('admin.index') }}" class="menu-link">
-                 <i class="menu-icon tf-icons ti ti-user-star"></i>
+                 <i class="menu-icon tf-icons ti ti-user-heart"></i>
                  Admin
              </a>
          </li>
