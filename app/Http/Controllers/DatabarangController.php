@@ -37,7 +37,7 @@ class DatabarangController extends Controller
 
     public function show(string $id)
     {
-        $databarang = DataBarang::findOrFail($id);
+        $databarang = DataBarang::with(['barangMasuk', 'barangKeluar'])->findOrFail($id);
         return view('pages.databarang.show', compact('databarang'));
     }
 

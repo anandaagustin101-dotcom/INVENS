@@ -17,7 +17,7 @@ class BarangMasuk extends Model
 
     public function databarang()
     {
-        return $this->belongsTo(databarang::class, 'databarang_id', 'id');
+        return $this->belongsTo(DataBarang::class, 'databarang_id', 'id');
     }
 
     

@@ -28,8 +28,8 @@
                             @foreach ($barangmasuk as $item)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration}}</th>
-                                    <td>{{ $item->databarang->nama}}</td>
-                                    <td>{{ $item->databarang->kode}}</td>
+                                    <td>{{ $item->databarang ? $item->databarang->nama : '-'}}</td>
+                                    <td>{{ $item->databarang ? $item->databarang->kode : '-'}}</td>
                                     <td>{{ $item->jumlah}}</td>
                                     <td>
                                         <a href="{{ route('barang-masuk.show',$item->id) }}" class="btn btn-sm btn-info">

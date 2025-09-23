@@ -11,6 +11,7 @@ class BarangMasukController extends Controller
     public function index()
     {
         $barangmasuk = BarangMasuk::with('databarang')->orderBy('created_at', 'desc')->get();
+        
         return view('pages.barangmasuk.index', compact('barangmasuk'));
     }
 
@@ -23,7 +24,7 @@ class BarangMasukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'databarang_id' => 'required|exists:databarang,id',
+            'databarang_id' => 'required', 
             'jumlah' => 'required|integer|min:1',
             'tanggal' => 'required|date',
         ]);
@@ -42,7 +43,7 @@ class BarangMasukController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'databarang_id' => 'required|exists:databarang,id',
+            'databarang_id' => 'required', 
             'jumlah' => 'required|integer|min:1',
             'tanggal' => 'required|date',
         ]);
@@ -80,4 +81,22 @@ class BarangMasukController extends Controller
         return redirect()->route('barang-masuk.index')
             ->with('success', 'Barang masuk berhasil dihapus dan stok otomatis dikurangi!');
     }
+
+        public function show($id)
+    {
+        $barangmasuk = BarangMasuk::with('databarang')->findOrFail($id);
+        return view('pages.barangmasuk.show', compact('barangmasuk'));
+    }
+
+        public function edit($id)
+    {
+        
+        $barangmasuk = BarangMasuk::with('databarang')->findOrFail($id);
+
+    
+        $databarang = Databarang::all();
+
+        return view('pages.barangmasuk.edit', compact('barangmasuk', 'databarang'));
+    }
+
 }

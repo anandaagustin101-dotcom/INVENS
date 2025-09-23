@@ -20,10 +20,23 @@ class BarangKeluarController extends Controller
         return view('pages.barangkeluar.create', compact('databarang'));
     }
 
+     public function show($id)
+    {
+        $barangkeluar = BarangKeluar::with('databarang')->findOrFail($id);
+        return view('pages.barangkeluar.show', compact('barangkeluar'));
+    }
+
+    public function edit(string $id)
+    {
+        $barangkeluar = BarangKeluar::findOrFail($id);
+        $databarang = Databarang::orderBy('nama', 'asc')->get(); 
+        return view('pages.barangkeluar.edit', compact('barangkeluar', 'databarang'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'databarang_id' => 'required|exists:databarang,id',
+            'databarang_id' => 'required', 
             'jumlah' => 'required|integer|min:1',
             'tanggal' => 'required|date',
         ]);
@@ -47,7 +60,7 @@ class BarangKeluarController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'databarang_id' => 'required|exists:databarang,id',
+            'databarang_id' => 'required', 
             'jumlah' => 'required|integer|min:1',
             'tanggal' => 'required|date',
         ]);
