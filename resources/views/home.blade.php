@@ -2,22 +2,115 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+    {{-- Kotak Ringkasan --}}
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm card-hover" style="background-color: #C0DAFD; color: #fff; min-height: 100px;">
+                <div class="card-body p-3">
+                    <i class="ti ti-package" style="font-size: 1.5rem;"></i>
+                    <h6 class="mt-2 mb-1">Data Barang</h6>
+                    <h4 class="mb-0">{{ $totalBarang }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm card-hover" style="background-color: #CBD9FC; color: #fff; min-height: 100px;">
+                <div class="card-body p-3">
+                    <i class="ti ti-package-import" style="font-size: 1.5rem;"></i>
+                    <h6 class="mt-2 mb-1">Barang Masuk</h6>
+                    <h4 class="mb-0">{{ $totalBarangMasuk }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm card-hover" style="background-color: #D7D4F9; color: #fff; min-height: 100px;">
+                <div class="card-body p-3">
+                    <i class="ti ti-package-export" style="font-size: 1.5rem;"></i>
+                    <h6 class="mt-2 mb-1">Barang Keluar</h6>
+                    <h4 class="mb-0">{{ $totalBarangKeluar }}</h4>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- Grafik --}}
+    <div class="card shadow-sm" style="background-color: #ffffff; color: #9CCDF4;">
+        <div class="card-header" style="background-color: #9CCDf4; color: #f8f6f6;">
+            Grafik Stok Barang
+        </div>
+        <div class="card-body text-center">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
 </div>
+
+<style>
+    #chart {
+        max-width: 600px;
+        max-height: 350px;
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+</style>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('/vendor/libs/chartjs/chartjs.js') }}"></script>
+<script type="text/javascript">
+    var ctx = document.getElementById('chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @json($labels),
+            datasets: [{
+                label: 'Jumlah Barang',
+                data: @json($data),
+                backgroundColor: [
+                    '#FCDEE2', 
+                    '#DBE5EF', 
+                    '#FFE5E0', 
+                    '#F0F3FA', 
+                    '#E8C3D3', 
+                    '#F1d8dd', 
+                ],
+                borderColor: 'rgba(255, 255, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: '#000000d3'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#000000ff'
+                    },
+                    grid: {
+                        color: 'rgba(90, 62, 43, 0.1)'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                        color: '#050403ff'
+                    },
+                    grid: {
+                        color: 'rgba(90, 62, 43, 0.1)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+@endpush

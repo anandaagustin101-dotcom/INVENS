@@ -56,6 +56,13 @@
              </a>
          </li>
 
+                  <li class="menu-item">
+             <a href="{{ route('laporan.index') }}" class="menu-link">
+                 <i class="menu-icon tf-icons ti ti-clipboard-text"></i>
+                 Laporan
+             </a>
+         </li>
+
          <li class="menu-item">
              <a href="{{ route('admin.index') }}" class="menu-link">
                  <i class="menu-icon tf-icons ti ti-user-heart"></i>

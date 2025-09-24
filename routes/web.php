@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaporanController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +27,10 @@ Route::group([
 
     Route::resource('/databarang', App\Http\Controllers\DatabarangController::class);
 
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+
+    Route::get('/laporan/export/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
+    
     Route::resource('/admin',App\Http\Controllers\AdminController::class);
 
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
