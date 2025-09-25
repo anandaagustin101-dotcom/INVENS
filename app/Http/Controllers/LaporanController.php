@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\DataBarang;
 use App\Models\BarangMasuk;
 use App\Models\BarangKeluar;
 use App\Models\Laporan;
-use PDF;
 
 class LaporanController extends Controller
 {

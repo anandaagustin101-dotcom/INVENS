@@ -5,7 +5,7 @@
     {{-- Kotak Ringkasan --}}
     <div class="row mb-4">
         <div class="col-md-4">
-            <div class="card text-center shadow-sm card-hover" style="background-color: #C0DAFD; color: #fff; min-height: 100px;">
+            <div class="card text-center shadow-sm card-hover" style="background-color: #9CCDf4; color: #fff; min-height: 100px;">
                 <div class="card-body p-3">
                     <i class="ti ti-package" style="font-size: 1.5rem;"></i>
                     <h6 class="mt-2 mb-1">Data Barang</h6>
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card text-center shadow-sm card-hover" style="background-color: #CBD9FC; color: #fff; min-height: 100px;">
+            <div class="card text-center shadow-sm card-hover" style="background-color: #9CCDf4; color: #fff; min-height: 100px;">
                 <div class="card-body p-3">
                     <i class="ti ti-package-import" style="font-size: 1.5rem;"></i>
                     <h6 class="mt-2 mb-1">Barang Masuk</h6>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card text-center shadow-sm card-hover" style="background-color: #D7D4F9; color: #fff; min-height: 100px;">
+            <div class="card text-center shadow-sm card-hover" style="background-color: #9CCDf4; color: #fff; min-height: 100px;">
                 <div class="card-body p-3">
                     <i class="ti ti-package-export" style="font-size: 1.5rem;"></i>
                     <h6 class="mt-2 mb-1">Barang Keluar</h6>
@@ -34,8 +34,8 @@
     </div>
 
     {{-- Grafik --}}
-    <div class="card shadow-sm" style="background-color: #ffffff; color: #9CCDF4;">
-        <div class="card-header" style="background-color: #9CCDf4; color: #f8f6f6;">
+    <div class="card shadow-sm" style="background-color: #ffffff; color: #BBDEFB ;">
+        <div class="card-header" style="background-color: #BBDEFB;  color: #0e0c0cff;">
             Grafik Stok Barang
         </div>
         <div class="card-body text-center">

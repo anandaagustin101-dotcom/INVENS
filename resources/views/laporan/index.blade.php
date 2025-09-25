@@ -10,9 +10,9 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Nama</th>
-                <th>Kode</th>
-                <th>Jumlah</th>
+                <th><b>Nama</b></th>
+                <th><b>Kode</b></th>
+                <th><b>Jumlah</b></th>
             </tr>
         </thead>
         <tbody>
@@ -33,10 +33,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Tanggal</th>
-                <th>Nama</th>
-                <th>Kode</th>
-                <th>Jumlah</th>
+                <th><b>Tanggal</b></th>
+                <th><b>Nama</b></th>
+                <th><b>Kode</b></th>
+                <th><b>Jumlah</b></th>
             </tr>
         </thead>
         <tbody>
@@ -49,7 +49,7 @@
             </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> 
 </div>
 
     <!-- Barang Keluar -->
@@ -58,10 +58,10 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Tanggal</th>
-                <th>Nama</th>
-                <th>Kode</th>
-                <th>Jumlah</th>
+                <th><b>Tanggal</b></th>
+                <th><b>Nama</b></th>
+                <th><b>Kode</b></th>
+                <th><b>Jumlah</b></th>
             </tr>
         </thead>
         <tbody>

@@ -50,6 +50,28 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset ('/js/config.js') }}"></script>
     @stack('styles')
+    <style>
+ /* Sidebar */
+.bg-menu-theme {
+  background: linear-gradient(180deg, #BBDEFB 100%,  #FFFFFF 100%) !important;
+  color: #000 !important;
+}
+
+/* Navbar */
+.bg-navbar-theme {
+  background: linear-gradient(90deg, #BBDEFB 100%, #E3F2FD 0%, #BBDEFB 100%) !important;
+  color: #000 !important;
+}
+
+
+    /* Biar teks & icon kontras */
+    .menu-inner .menu-item a,
+    .layout-navbar .navbar-nav .nav-link,
+    .app-brand-text {
+      color: #000000ff !important;
+    }
+</style>
+
   </head>
 
   <body>
