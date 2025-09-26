@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Infentify</title>
+    <title>Login Inventify</title>
 
     <meta name="description" content="" />
 
@@ -61,6 +61,88 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+<style>
+  .login-box {
+    background: rgba(255, 255, 255, 0.20); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 15px; 
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+  .authentication-wrapper {
+    background: url("{{ asset('img/icons/misc/in.png') }}") no-repeat center center;
+    background-size: cover;        
+    background-attachment: fixed;   
+    min-height: 100vh;              
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+  .authentication-wrapper::before {
+    display: none !important;
+  }
+
+  .authentication-inner {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    /* Kotak luar */
+.card {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Isi dalam kotak */
+.card-body {
+  background: transparent !important;
+  border-radius: 20px !important;
+  padding: 30px !important;
+}
+
+/* Input transparan */
+.form-control {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #000 !important;
+}
+
+.form-control::placeholder {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Tombol transparan */
+.btn-primary {
+  background: rgba(0, 123, 255, 0.85) !important;
+  border: none !important;
+  backdrop-filter: blur(4px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+  background: rgba(0, 123, 255, 1) !important;
+}
+
+}
+
+</style>
+
   </head>
 
   <body>
@@ -76,37 +158,14 @@
               <div class="app-brand justify-content-center mb-6">
                 <a href="index.html" class="app-brand-link">
                   <span class="app-brand-logo demo">
-                    <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
-                        fill="#7367F0" />
-                      <path
-                        opacity="0.06"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
-                        fill="#161616" />
-                      <path
-                        opacity="0.06"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
-                        fill="#161616" />
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
-                        fill="#7367F0" />
-                    </svg>
+                    <img src="{{ asset('img/icons/misc/logo-inves.jpg.png') }}" alt="Inventify Logo" style="width: 80px; height: 60px;">
                   </span>
-                  <span class="app-brand-text demo text-heading fw-bold">Vuexy</span>
+                  <span class="app-brand-text demo text-heading fw-bold">Inventify</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-1">Selamat Datang </h4>
-              <p class="mb-6">Silahkan login untuk masuk ke INVENTIFY</p>
+              <h4 class="mb-1" style="text-align:center;">Selamat Datang </h4>
+              <p class="mb-6" style="text-align:center;">Silahkan login untuk masuk ke INVENTIFY</p>
 
               <form id="formAuthentication" class="mb-4" action="{{ route('login') }}" method="POST">
                 @csrf

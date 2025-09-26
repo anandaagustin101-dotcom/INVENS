@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataBarang;
+use App\Models\BarangMasuk;
+use App\Models\BarangKeluar;
 
 class DatabarangController extends Controller
 {
@@ -21,18 +23,15 @@ class DatabarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'kode' => 'required|unique:barang,kode',
-            'jumlah' => 'required',
+            'nama'   => 'required',
+            'kode'   => 'required|unique:databarang,kode',
+            'jumlah' => 'required|integer|min:0',
         ]);
 
         DataBarang::create($request->all());
-        return redirect()->route('databarang.index')
-        ->with('success', 'Data barang berhasil ditambahkan');
 
-         BarangMasuk::create($request->all());
-        return redirect()->route('barang-masuk.index')
-        ->with('success', 'Data barang masuk berhasil ditambahkan');
+        return redirect()->route('databarang.index')
+            ->with('success', 'Data barang berhasil ditambahkan');
     }
 
     public function show(string $id)
@@ -50,22 +49,28 @@ class DatabarangController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'kode' => 'required|unique:databarang,kode,' . $id,
-            'jumlah' => 'required',
+            'nama'   => 'required',
+            'kode'   => 'required|unique:databarang,kode,' . $id,
+            'jumlah' => 'required|integer|min:0',
         ]);
 
         $databarang = DataBarang::findOrFail($id);
         $databarang->update($request->all());
+
         return redirect()->route('databarang.index')
-        ->with('success', 'Data barang berhasil diubah');
+            ->with('success', 'Data barang berhasil diubah');
     }
 
     public function destroy(string $id)
     {
+        BarangMasuk::where('databarang_id', $id)->delete();
+
+        BarangKeluar::where('databarang_id', $id)->delete();
+
         $databarang = DataBarang::findOrFail($id);
         $databarang->delete();
+
         return redirect()->route('databarang.index')
-        ->with('succes', 'Data barang berhasil dihapus');
+            ->with('success', 'Data barang beserta data masuk dan keluar berhasil dihapus!');
     }
 }

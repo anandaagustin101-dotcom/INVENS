@@ -1,9 +1,29 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="{{ route('home') }}" class="app-brand-link">
-            <img src="{{ asset('img/icons/misc/logo-inves.png') }}" alt="Logo" class="logo" />
-            <span class="app-brand-text demo menu-text fw-bold">Inventify</span>
+            <img src="{{ asset('img/icons/misc/logo-inves.jpg.png') }}" alt="Logo" class="logo"
+            style="width: 80px; height: auto;" />
+            <span class="app-brand-text demo menu-text fw-bold" style="margin-left:2px;">Inventify</span>
         </a>
+
+        <style>
+    .app-brand-link {
+        display: flex !important;
+        align-items: center !important;
+        gap: 1px !important;   /* jarak logo ke teks */
+        padding-left: 0 !important;
+    }
+
+    .app-brand-link .logo {
+        width: 70px !important;  /* ubah sesuai selera */
+        height: auto !important;
+    }
+
+    .app-brand-logo.demo {
+        width: auto !important;
+        height: auto !important;
+    }
+</style>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="ti menu-toggle-icon d-none d-xl-block align-middle"></i>
