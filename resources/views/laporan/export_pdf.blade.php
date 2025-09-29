@@ -9,15 +9,13 @@
         th { background:#f2f2f2; font-weight: bold; text-align: center; }
         h2, h3, h4 { margin: 10px 0 5px; }
 
-        /* Tambahan */
         .center { text-align: center; }
     </style>
 </head>
 <body>
-    <!-- Judul -->
+
     <h2 style="text-align:center; margin-bottom:20px;">LAPORAN BARANG</h2>
 
-    <!-- Stok Barang -->
     <h4>Stok Barang</h4>
     <table>
         <thead>
@@ -38,7 +36,6 @@
         </tbody>
     </table>
 
-    <!-- Barang Masuk -->
     <h4>Barang Masuk</h4>
     <table>
         <thead>
@@ -61,7 +58,6 @@
         </tbody>
     </table>
 
-    <!-- Barang Keluar -->
     <h4>Barang Keluar</h4>
     <table>
         <thead>
@@ -84,7 +80,6 @@
         </tbody>
     </table>
 
-    <!-- Rekapitulasi -->
     <h4>Rekapitulasi</h4>
     <table>
         <tr>
@@ -101,7 +96,6 @@
         </tr>
     </table>
 
-    <!-- Footer -->
     <p style="text-align:center; font-size:11px; margin-top:30px;">
         Dicetak pada: {{ now()->format('d-m-Y') }}
     </p>

@@ -33,9 +33,30 @@
         </div>
     </div>
 
+    {{-- Barang Hampir Habis --}}
+    <div class="card shadow-sm mt-4 mb-4" style="background-color: #f8d7da; border-left: 5px solid #f5c2c7;">
+        <div class="card-header" style="background-color: #f5c2c7; color: #842029; font-weight: bold;">
+            Barang Hampir Habis
+        </div>
+        <div class="card-body">
+            @if($barangHampirHabis->isEmpty())
+                <p class="text-dark mb-0">Semua stok masih aman ✅</p>
+            @else
+                <ul class="list-group">
+                    @foreach($barangHampirHabis as $barang)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ $barang->nama }} (Sisa : {{ $barang->jumlah }})
+                            <span class="badge bg-danger">{{ $barang->jumlah }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </div>
+
     {{-- Grafik --}}
     <div class="card shadow-sm" style="background-color: #ffffff; color: #BBDEFB ;">
-        <div class="card-header" style="background-color: #BBDEFB;  color: #0e0c0cff;">
+        <div class="card-header" style="background-color: #BBDEFB; color: #0e0c0cff;">
             Grafik Stok Barang
         </div>
         <div class="card-body text-center">
