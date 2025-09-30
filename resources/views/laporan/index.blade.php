@@ -1,148 +1,103 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .card {
-        background-color: #f0f8ff !important; 
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-    }
+<div class="container">
+    <h3 class="mb-4">Laporan</h3>
 
-    .container {
-        max-width: 1200px; 
-    }
+    <!-- Filter -->
+    <form action="{{ route('laporan.index') }}" method="GET" class="mb-4">
+        <div class="row g-2">
+            <div class="col-md-3">
+                <select name="filter" class="form-select" id="filter">
+                    <option value="">-- Pilih Filter --</option>
+                    <option value="tanggal" {{ request('filter') == 'tanggal' ? 'selected' : '' }}>Per Tanggal</option>
+                    <option value="bulan" {{ request('filter') == 'bulan' ? 'selected' : '' }}>Per Bulan</option>
+                    <option value="tahun" {{ request('filter') == 'tahun' ? 'selected' : '' }}>Per Tahun</option>
+                </select>
+            </div>
 
-    table thead {
-        background-color: #a2d2ff;
-        color: #fff;
-        text-align: center;
-    }
+            <div class="col-md-3" id="tanggalInput" style="display:none;">
+                <input type="date" name="tanggal" class="form-control" value="{{ request('tanggal') }}">
+            </div>
 
-    table tbody tr:nth-child(even) {
-        background-color: #e6f0ff;
-    }
-    table tbody tr:nth-child(odd) {
-        background-color: #ffffff;
-    }
-    table td {
-        text-align: center;
-    }
-</style>
+            <div class="col-md-3" id="bulanInput" style="display:none;">
+                <input type="number" name="bulan" class="form-control" min="1" max="12"
+                       placeholder="Bulan (1-12)" value="{{ request('bulan') }}">
+            </div>
 
-    <div class="container">
-    <h3 class="text-center">LAPORAN STOK & PERGERAKAN BARANG</h3>
+            <div class="col-md-3" id="tahunInput" style="display:none;">
+                <input type="number" name="tahun" class="form-control"
+                       placeholder="Tahun" value="{{ request('tahun') }}">
+            </div>
 
-    <div class="mt-3 mb-4">
-    <form action="{{ route('laporan.export.pdf') }}" method="GET" class="row g-2">
-        
-        <div class="col-md-3">
-           <select name="filter" class="form-select w-auto d-inline-block">
-                <option value="">-- Pilih Filter --</option>
-                <option value="hari">Per Hari</option>
-                <option value="bulan">Per Bulan</option>
-                <option value="tahun">Per Tahun</option>
-            </select>
-        </div>
-
-        <div class="col-md-3" id="tanggalInput" style="display: none;">
-            <input type="date" name="tanggal" class="form-control">
-        </div>
-
-        <div class="col-md-3" id="bulanInput" style="display: none;">
-            <input type="month" name="bulan" class="form-control">
-        </div>
-
-        <div class="col-md-3" id="tahunInput" style="display: none;">
-            <input type="number" name="tahun" class="form-control" placeholder="Contoh: 2025">
-        </div>
-
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-danger w-100">Export PDF</button>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Terapkan</button>
+            </div>
         </div>
     </form>
-</div>
 
-    @if($barangHampirHabis->count() > 0)
-        <div class="alert alert-warning">
-            ⚠ <b>Barang Hampir Habis</b><br>
-            @foreach($barangHampirHabis as $bh)
-                Barang <b>{{ $bh->nama }}</b> stok tinggal <b>{{ $bh->jumlah }}</b> <br>
-            @endforeach
+    <!-- Tabel Data -->
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-danger">
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($laporan as $index => $item)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->jumlah }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
+                            <td>
+                                <a href="{{ route('laporan.detail', $item->id) }}" class="btn btn-info btn-sm">
+                                    Detail
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5">Tidak ada data</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-    @endif
-
-    <!-- Stok Barang -->
-    <h5>Stok Barang</h5>
-    <div class="card mb-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><b>Nama</b></th>
-                    <th><b>Kode</b></th>
-                    <th><b>Jumlah</b></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($stok as $item)
-                <tr>
-                    <td>{{ $item->nama }}</td>
-                    <td>{{ $item->kode }}</td>
-                    <td>{{ $item->jumlah }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
 
-    <!-- Barang Masuk -->
-    <h5>Barang Masuk</h5>
-    <div class="card mb-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><b>Tanggal</b></th>
-                    <th><b>Nama</b></th>
-                    <th><b>Kode</b></th>
-                    <th><b>Jumlah</b></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($masuk as $item)
-                <tr>
-                    <td>{{ $item->tanggal }}</td>
-                    <td>{{ $item->databarang->nama ?? '-' }}</td>
-                    <td>{{ $item->databarang->kode ?? '-' }}</td>
-                    <td>{{ $item->jumlah }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table> 
-    </div>
-
-    <!-- Barang Keluar -->
-    <h5>Barang Keluar</h5>
-    <div class="card mb-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><b>Tanggal</b></th>
-                    <th><b>Nama</b></th>
-                    <th><b>Kode</b></th>
-                    <th><b>Jumlah</b></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($keluar as $item)
-                <tr>
-                    <td>{{ $item->tanggal }}</td>
-                    <td>{{ $item->databarang->nama ?? '-' }}</td>
-                    <td>{{ $item->databarang->kode ?? '-' }}</td>
-                    <td>{{ $item->jumlah }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <!-- Tombol Export -->
+    <div class="mt-4 text-end">
+        <a href="{{ route('laporan.export.pdf', request()->all()) }}" class="btn btn-danger">
+            Export PDF
+        </a>
     </div>
 </div>
+
+<script>
+    function showFilterInputs() {
+        let filter = document.getElementById('filter').value;
+        document.getElementById('tanggalInput').style.display = 'none';
+        document.getElementById('bulanInput').style.display = 'none';
+        document.getElementById('tahunInput').style.display = 'none';
+
+        if (filter === 'tanggal') {
+            document.getElementById('tanggalInput').style.display = 'block';
+        } else if (filter === 'bulan') {
+            document.getElementById('bulanInput').style.display = 'block';
+            document.getElementById('tahunInput').style.display = 'block';
+        } else if (filter === 'tahun') {
+            document.getElementById('tahunInput').style.display = 'block';
+        }
+    }
+
+    document.getElementById('filter').addEventListener('change', showFilterInputs);
+    showFilterInputs();
+</script>
 @endsection

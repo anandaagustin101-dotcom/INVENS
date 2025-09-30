@@ -1,103 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan Barang</title>
+    <meta charset="utf-8">
+    <title>{{ $judulLaporan }}</title>
     <style>
-        body { font-family: sans-serif; font-size: 12px; }
-        table { width:100%; border-collapse: collapse; margin-bottom: 15px; }
-        th, td { border:1px solid #000; padding:5px; }
-        th { background:#f2f2f2; font-weight: bold; text-align: center; }
-        h2, h3, h4 { margin: 10px 0 5px; }
-
-        .center { text-align: center; }
+        body { font-family: DejaVu Sans, sans-serif; font-size: 12px; }
+        h2 { text-align: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
+        th, td { border: 1px solid #000; padding: 6px; text-align: center; }
+        th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
 
-    <h2 style="text-align:center; margin-bottom:20px;">LAPORAN BARANG</h2>
+    <h2>{{ $judulLaporan }}</h2>
 
-    <h4>Stok Barang</h4>
+    {{-- Stok Barang --}}
+    <h3>Stok Barang</h3>
     <table>
         <thead>
             <tr>
-                <th class="center">Nama</th>
-                <th class="center">Kode</th>
-                <th class="center">Jumlah</th>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Kode</th>
+                <th>Jumlah</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($stok as $item)
+            @foreach($stok as $i => $item)
             <tr>
-                <td class="center">{{ $item->nama }}</td>
-                <td class="center">{{ $item->kode }}</td>
-                <td class="center">{{ $item->jumlah }}</td>
+                <td>{{ $i+1 }}</td>
+                <td>{{ $item->nama }}</td>
+                <td>{{ $item->kode }}</td>
+                <td>{{ $item->jumlah }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <h4>Barang Masuk</h4>
+    {{-- Barang Masuk --}}
+    <h3>Barang Masuk</h3>
     <table>
         <thead>
             <tr>
-                <th class="center">Tanggal</th>
-                <th class="center">Nama</th>
-                <th class="center">Kode</th>
-                <th class="center">Jumlah</th>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Jumlah</th>
+                <th>Tanggal Masuk</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($masuk as $item)
+            @foreach($masuk as $i => $item)
             <tr>
-                <td class="center">{{ $item->created_at->format('d-m-Y') }}</td>
-                <td class="center">{{ $item->databarang->nama ?? '-' }}</td>
-                <td class="center">{{ $item->databarang->kode ?? '-' }}</td>
-                <td class="center">{{ $item->jumlah }}</td>
+                <td>{{ $i+1 }}</td>
+<td>{{ $item->dataBarang->nama ?? '-' }}</td>
+
+                <td>{{ $item->jumlah }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <h4>Barang Keluar</h4>
+    {{-- Barang Keluar --}}
+    <h3>Barang Keluar</h3>
     <table>
         <thead>
             <tr>
-                <th class="center">Tanggal</th>
-                <th class="center">Nama</th>
-                <th class="center">Kode</th>
-                <th class="center">Jumlah</th>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Jumlah</th>
+                <th>Tanggal Keluar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($keluar as $item)
+            @foreach($keluar as $i => $item)
             <tr>
-                <td class="center">{{ $item->created_at->format('d-m-Y') }}</td>
-                <td class="center">{{ $item->databarang->nama ?? '-' }}</td>
-                <td class="center">{{ $item->databarang->kode ?? '-' }}</td>
-                <td class="center">{{ $item->jumlah }}</td>
+                <td>{{ $i+1 }}</td>
+<td>{{ $item->dataBarang->nama ?? '-' }}</td>
+
+                <td>{{ $item->jumlah }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <h4>Rekapitulasi</h4>
+    {{-- Barang Hampir Habis --}}
+    <h3>Barang Hampir Habis (Stok ≤ 5)</h3>
     <table>
-        <tr>
-            <th class="center">Total Stok</th>
-            <td class="center">{{ $stok->sum('jumlah') }}</td>
-        </tr>
-        <tr>
-            <th class="center">Total Barang Masuk</th>
-            <td class="center">{{ $masuk->sum('jumlah') }}</td>
-        </tr>
-        <tr>
-            <th class="center">Total Barang Keluar</th>
-            <td class="center">{{ $keluar->sum('jumlah') }}</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Kode</th>
+                <th>Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($barangHampirHabis as $i => $item)
+            <tr>
+                <td>{{ $i+1 }}</td>
+                <td>{{ $item->nama }}</td>
+                <td>{{ $item->kode }}</td>
+                <td>{{ $item->jumlah }}</td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="4">Tidak ada barang hampir habis</td>
+            </tr>
+            @endforelse
+        </tbody>
     </table>
 
-    <p style="text-align:center; font-size:11px; margin-top:30px;">
-        Dicetak pada: {{ now()->format('d-m-Y') }}
-    </p>
-</body> 
+</body>
 </html>

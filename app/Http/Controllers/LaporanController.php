@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\DataBarang;
@@ -9,66 +10,63 @@ use App\Models\BarangKeluar;
 
 class LaporanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $stok   = DataBarang::all();
-        $masuk  = BarangMasuk::with('databarang')->get();
-        $keluar = BarangKeluar::with('databarang')->get();
-
-        $barangHampirHabis = DataBarang::where('jumlah', '<=', 5)->get();
-
-        return view('laporan.index', compact('stok','masuk','keluar','barangHampirHabis'));
-    }
-
-    public function exportPdf(Request $request)
-    {
-        
         $filter  = $request->input('filter'); 
         $tanggal = $request->input('tanggal'); 
         $bulan   = $request->input('bulan');   
         $tahun   = $request->input('tahun');   
 
-        $stok   = DataBarang::all();
-        $masuk  = BarangMasuk::with('databarang');
-        $keluar = BarangKeluar::with('databarang');
+        $laporan = DataBarang::query();
 
-        if ($filter == 'hari' && $tanggal) {
-            $masuk  = $masuk->whereDate('created_at', $tanggal);
-            $keluar = $keluar->whereDate('created_at', $tanggal);
+        if ($filter == 'tanggal' && $tanggal) {
+            $laporan->whereDate('created_at', $tanggal);
         }
 
         if ($filter == 'bulan' && $bulan) {
-            $masuk  = $masuk->whereMonth('created_at', date('m', strtotime($bulan)))
-                            ->whereYear('created_at', date('Y', strtotime($bulan)));
-            $keluar = $keluar->whereMonth('created_at', date('m', strtotime($bulan)))
-                             ->whereYear('created_at', date('Y', strtotime($bulan)));
+            $laporan->whereMonth('created_at', $bulan);
+            if ($tahun) {
+                $laporan->whereYear('created_at', $tahun);
+            }
         }
 
         if ($filter == 'tahun' && $tahun) {
-            $masuk  = $masuk->whereYear('created_at', $tahun);
-            $keluar = $keluar->whereYear('created_at', $tahun);
+            $laporan->whereYear('created_at', $tahun);
         }
 
-        $masuk  = $masuk->get();
-        $keluar = $keluar->get();
+        $laporan = $laporan->get();
 
-        $barangHampirHabis = DataBarang::where('jumlah', '<=', 5)->get();
+        return view('laporan.index', compact('laporan'));
+    }
 
-        $judulLaporan = "Laporan Barang";
-        if ($filter == 'hari' && $tanggal) {
-            $judulLaporan .= " Tanggal " . date('d-m-Y', strtotime($tanggal));
-        } elseif ($filter == 'bulan' && $bulan) {
-            $judulLaporan .= " Bulan " . date('F Y', strtotime($bulan));
-        } elseif ($filter == 'tahun' && $tahun) {
-            $judulLaporan .= " Tahun " . $tahun;
-        } else {
-            $judulLaporan .= " (Semua Data)";
-        }
+    public function detail($id)
+    {
+        $barang = DataBarang::findOrFail($id);
+        $barangMasuk = BarangMasuk::where('databarang_id', $id)->get();
+        $barangKeluar = BarangKeluar::where('databarang_id', $id)->get();
 
-        $pdf = PDF::loadView('laporan.export_pdf', compact(
-            'stok','masuk','keluar','barangHampirHabis','judulLaporan'
+        return view('laporan.detail', compact('barang', 'barangMasuk', 'barangKeluar'));
+    }
+
+        public function exportPdf(Request $request)
+    {
+        $barangId = $request->barang_id;
+
+        $stok   = DataBarang::where('id', $barangId)->get();
+        $masuk  = BarangMasuk::where('databarang_id', $barangId)->get();
+        $keluar = BarangKeluar::where('databarang_id', $barangId)->get();
+
+        $barangHampirHabis = DataBarang::where('id', $barangId)
+            ->where('jumlah', '<=', 5)
+            ->get();
+
+        $judulLaporan = "Laporan Inventaris Barang";
+
+        $pdf = \PDF::loadView('laporan.export_pdf', compact(
+            'stok', 'masuk', 'keluar', 'barangHampirHabis', 'judulLaporan'
         ));
 
         return $pdf->download('laporan.pdf');
     }
+
 }

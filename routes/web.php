@@ -28,8 +28,8 @@ Route::group([
     Route::resource('/databarang', App\Http\Controllers\DatabarangController::class);
 
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
-    
     Route::get('/laporan/export/pdf', [LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
+    Route::get('/laporan/{id}/detail', [LaporanController::class, 'detail'])->name('laporan.detail');
 
     Route::resource('/admin',App\Http\Controllers\AdminController::class);
 
