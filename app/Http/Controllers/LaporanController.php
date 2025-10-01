@@ -49,24 +49,37 @@ class LaporanController extends Controller
     }
 
         public function exportPdf(Request $request)
-    {
-        $barangId = $request->barang_id;
+{
+    $filter  = $request->input('filter');
+    $tanggal = $request->input('tanggal');
+    $bulan   = $request->input('bulan');
+    $tahun   = $request->input('tahun');
 
-        $stok   = DataBarang::where('id', $barangId)->get();
-        $masuk  = BarangMasuk::where('databarang_id', $barangId)->get();
-        $keluar = BarangKeluar::where('databarang_id', $barangId)->get();
+    $query = DataBarang::query();
 
-        $barangHampirHabis = DataBarang::where('id', $barangId)
-            ->where('jumlah', '<=', 5)
-            ->get();
-
-        $judulLaporan = "Laporan Inventaris Barang";
-
-        $pdf = \PDF::loadView('laporan.export_pdf', compact(
-            'stok', 'masuk', 'keluar', 'barangHampirHabis', 'judulLaporan'
-        ));
-
-        return $pdf->download('laporan.pdf');
+    if ($filter == 'tanggal' && $tanggal) {
+        $query->whereDate('created_at', $tanggal);
+    } elseif ($filter == 'bulan' && $bulan && $tahun) {
+        $query->whereMonth('created_at', $bulan)
+              ->whereYear('created_at', $tahun);
+    } elseif ($filter == 'tahun' && $tahun) {
+        $query->whereYear('created_at', $tahun);
     }
+
+    $stok   = $query->get();
+    $masuk  = BarangMasuk::whereIn('databarang_id', $stok->pluck('id'))->get();
+    $keluar = BarangKeluar::whereIn('databarang_id', $stok->pluck('id'))->get();
+
+    $barangHampirHabis = $stok->where('jumlah', '<=', 5);
+
+    $judulLaporan = "Laporan Inventaris Barang";
+
+    $pdf = \PDF::loadView('laporan.export_pdf', compact(
+        'stok', 'masuk', 'keluar', 'barangHampirHabis', 'judulLaporan'
+    ));
+
+    return $pdf->download('laporan.pdf');
+}
+
 
 }

@@ -1,19 +1,34 @@
 @extends('layouts.app')
 
+@section('title', 'Detail Barang')
+
 @section('content')
 <div class="container">
-    <h3 class="mb-4">Detail Barang: {{ $barang->nama }}</h3>
+    <h3 class="text-center" mb-4>Detail Barang : {{ $barang->nama }}</h3>
 
-    <!-- Info Barang -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <p><strong>Kode:</strong> {{ $barang->kode }}</p>
-            <p><strong>Jumlah Stok:</strong> {{ $barang->jumlah }}</p>
-            <p><strong>Dibuat:</strong> {{ $barang->created_at->format('d-m-Y') }}</p>
+     <div class="row">
+        <div class="col-md-12">
+        <div class="card mb-4">
+        <div class="card card-body ">
+            <table class="table table-striped">
+                <tr>
+                    <th>Kode:</th>
+                    <td>{{ $barang->kode }}</td>
+                </tr>
+                <tr>
+                    <th>Jumlah Stok:</th>
+                    <td>{{ $barang->jumlah }}</td>
+                </tr>
+                <tr>
+                     <th>Dibuat:</th>
+                     <td>{{ $barang->created_at->format('d-m-Y') }}</td>
+                </tr>
+            </table>
         </div>
     </div>
+    </div>
+    </div>
 
-    <!-- Barang Masuk -->
     <div class="card mb-4">
         <div class="card-header bg-success text-white">Barang Masuk</div>
         <div class="card-body">
@@ -40,7 +55,6 @@
         </div>
     </div>
 
-    <!-- Barang Keluar -->
     <div class="card mb-4">
         <div class="card-header bg-danger text-white">Barang Keluar</div>
         <div class="card-body">
@@ -69,4 +83,7 @@
 
     <a href="{{ route('laporan.index') }}" class="btn btn-secondary">Kembali</a>
 </div>
+
 @endsection
+
+

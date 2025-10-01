@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
+@section('title', 'Halaman Laporan')
+
 @section('content')
 <div class="container">
-    <h3 class="mb-4">Laporan</h3>
+    <h3 class="text-center" mb-4>LAPORAN</h3>
 
     <!-- Filter -->
     <form action="{{ route('laporan.index') }}" method="GET" class="mb-4">
         <div class="row g-2">
             <div class="col-md-3">
                 <select name="filter" class="form-select" id="filter">
-                    <option value="">-- Pilih Filter --</option>
+                    <option value=""class="text-center"> Pilih Opsi </option>
                     <option value="tanggal" {{ request('filter') == 'tanggal' ? 'selected' : '' }}>Per Tanggal</option>
                     <option value="bulan" {{ request('filter') == 'bulan' ? 'selected' : '' }}>Per Bulan</option>
                     <option value="tahun" {{ request('filter') == 'tahun' ? 'selected' : '' }}>Per Tahun</option>
@@ -73,7 +75,7 @@
     </div>
 
     <!-- Tombol Export -->
-    <div class="mt-4 text-end">
+    <div class="mt-4 text-start">
         <a href="{{ route('laporan.export.pdf', request()->all()) }}" class="btn btn-danger">
             Export PDF
         </a>

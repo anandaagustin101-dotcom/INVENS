@@ -16,16 +16,13 @@ class HomeController extends Controller
 
     public function index()
     {
-        // Ambil label dan data stok barang (untuk grafik)
         $labels = DataBarang::pluck('nama')->toArray();
         $data   = DataBarang::pluck('jumlah')->toArray();
 
-        // Hitung total untuk kotak ringkasan
         $totalBarang = DataBarang::count();
         $totalBarangMasuk = BarangMasuk::count();
         $totalBarangKeluar = BarangKeluar::count();
 
-        // Barang hampir habis (stok <= 5)
         $barangHampirHabis = DataBarang::where('jumlah', '<=', 5)->get();
 
         return view('home', compact(

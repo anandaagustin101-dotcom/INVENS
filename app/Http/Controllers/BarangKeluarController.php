@@ -49,7 +49,6 @@ class BarangKeluarController extends Controller
 
         $barangkeluar = BarangKeluar::create($request->all());
 
-        // Kurangi stok
         $barang->jumlah -= $request->jumlah;
         $barang->save();
 
@@ -67,15 +66,12 @@ class BarangKeluarController extends Controller
 
         $barangkeluar = BarangKeluar::findOrFail($id);
 
-        // Balikin stok lama
         $barangLama = Databarang::findOrFail($barangkeluar->databarang_id);
         $barangLama->jumlah += $barangkeluar->jumlah;
         $barangLama->save();
 
-        // Update data
         $barangkeluar->update($request->all());
 
-        // Kurangi stok baru
         $barangBaru = Databarang::findOrFail($request->databarang_id);
 
         if ($barangBaru->jumlah < $request->jumlah) {
@@ -93,7 +89,6 @@ class BarangKeluarController extends Controller
     {
         $barangkeluar = BarangKeluar::findOrFail($id);
 
-        // Balikin stok
         $barang = Databarang::findOrFail($barangkeluar->databarang_id);
         $barang->jumlah += $barangkeluar->jumlah;
         $barang->save();

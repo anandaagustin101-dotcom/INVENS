@@ -40,3 +40,13 @@
 h4, p {
     color: #333 !important;
 }
+
+.tabel-masuk thead {
+    background-color: #BBDEFB;
+    color: white;
+}
+
+.tabel-keluar thead {
+    background-color: #f8d7da;
+    color: white;
+}

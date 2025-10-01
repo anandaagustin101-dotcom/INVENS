@@ -64,7 +64,6 @@
 }
 
 
-    /* Biar teks & icon kontras */
     .menu-inner .menu-item a,
     .layout-navbar .navbar-nav .nav-link,
     .app-brand-text {

@@ -6,7 +6,6 @@
     <div class="row">
         <div class="col-md-12">
             <h3 class="page-title">Data Barang</h3>
-
             
                 <a href="{{ route('databarang.create') }}" class="btn btn-primary mb-3">
                     <span class="ti ti-plus me-1"></span>

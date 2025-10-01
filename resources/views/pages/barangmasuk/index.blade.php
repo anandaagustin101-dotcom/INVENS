@@ -7,7 +7,6 @@
         <div class="col-md-12">
             <h3 class="page-title">Barang Masuk</h3>
 
-            
                 <a href="{{ route('barang-masuk.create') }}" class="btn btn-primary mb-3">
                     <span class="ti ti-plus me-1"></span>
                     Tambah

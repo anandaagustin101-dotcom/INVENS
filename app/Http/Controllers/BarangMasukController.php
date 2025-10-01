@@ -31,7 +31,6 @@ class BarangMasukController extends Controller
 
         $barangmasuk = BarangMasuk::create($request->all());
 
-        // Tambah stok ke data barang
         $barang = Databarang::findOrFail($request->databarang_id);
         $barang->jumlah += $request->jumlah;
         $barang->save();
@@ -50,15 +49,12 @@ class BarangMasukController extends Controller
 
         $barangmasuk = BarangMasuk::findOrFail($id);
 
-        // Rollback stok lama
         $barangLama = Databarang::findOrFail($barangmasuk->databarang_id);
         $barangLama->jumlah -= $barangmasuk->jumlah;
         $barangLama->save();
 
-        // Update data
         $barangmasuk->update($request->all());
 
-        // Tambah stok baru
         $barangBaru = Databarang::findOrFail($request->databarang_id);
         $barangBaru->jumlah += $request->jumlah;
         $barangBaru->save();
@@ -71,7 +67,6 @@ class BarangMasukController extends Controller
     {
         $barangmasuk = BarangMasuk::findOrFail($id);
 
-        // Balikin stok
         $barang = Databarang::findOrFail($barangmasuk->databarang_id);
         $barang->jumlah -= $barangmasuk->jumlah;
         $barang->save();

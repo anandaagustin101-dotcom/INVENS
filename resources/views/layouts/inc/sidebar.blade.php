@@ -10,12 +10,12 @@
     .app-brand-link {
         display: flex !important;
         align-items: center !important;
-        gap: 1px !important;   /* jarak logo ke teks */
+        gap: 1px !important; 
         padding-left: 0 !important;
     }
 
     .app-brand-link .logo {
-        width: 70px !important;  /* ubah sesuai selera */
+        width: 70px !important; 
         height: auto !important;
     }
 
