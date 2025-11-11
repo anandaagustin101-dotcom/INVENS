@@ -6,7 +6,6 @@
 <div class="container">
     <h3 class="text-center" mb-4>LAPORAN</h3>
 
-    <!-- Filter -->
     <form action="{{ route('laporan.index') }}" method="GET" class="mb-4">
         <div class="row g-2">
             <div class="col-md-3">
@@ -38,7 +37,6 @@
         </div>
     </form>
 
-    <!-- Tabel Data -->
     <div class="card">
         <div class="card-body">
             <table class="table table-bordered text-center align-middle">
@@ -74,7 +72,6 @@
         </div>
     </div>
 
-    <!-- Tombol Export -->
     <div class="mt-4 text-start">
         <a href="{{ route('laporan.export.pdf', request()->all()) }}" class="btn btn-danger">
             Export PDF

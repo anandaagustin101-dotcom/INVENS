@@ -12,7 +12,7 @@
         <div class="card card-body ">
             <table class="table table-striped">
                 <tr>
-                    <th>Kode:</th>
+                    <th>Kode:</th> 
                     <td>{{ $barang->kode }}</td>
                 </tr>
                 <tr>

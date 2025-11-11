@@ -23,7 +23,7 @@ class DatabarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'   => 'required',
+            'nama'   => 'required|unique:databarang,nama',
             'kode'   => 'required|unique:databarang,kode',
             'jumlah' => 'required|integer|min:0',
         ]);
@@ -49,7 +49,7 @@ class DatabarangController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama'   => 'required',
+            'nama'   => 'required|unique:databarang,nama',
             'kode'   => 'required|unique:databarang,kode,' . $id,
             'jumlah' => 'required|integer|min:0',
         ]);
@@ -73,4 +73,5 @@ class DatabarangController extends Controller
         return redirect()->route('databarang.index')
             ->with('success', 'Data barang beserta data masuk dan keluar berhasil dihapus!');
     }
+    
 }

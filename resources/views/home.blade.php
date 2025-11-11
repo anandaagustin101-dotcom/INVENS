@@ -36,8 +36,8 @@
     </div>
 
     {{-- Barang Hampir Habis --}}
-    <div class="card shadow-sm mt-4 mb-4" style="background-color: #f8d7da; border-left: 5px solid #f5c2c7;">
-        <div class="card-header" style="background-color: #f5c2c7; color: #842029; font-weight: bold;">
+    <div class="card shadow-sm mt-4 mb-4" style="background-color: #9CCDf4; border-left: 5px solid #BBDEFB;">
+        <div class="card-header" style="background-color: #BBDEFB; color: #0e0c0cff; font-weight: bold;">
             Barang Hampir Habis
         </div>
         <div class="card-body">

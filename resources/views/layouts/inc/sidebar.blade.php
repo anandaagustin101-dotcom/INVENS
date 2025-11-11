@@ -34,41 +34,54 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('home') ? 'active' : '' }}">
             <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home-heart"></i>
                 Dashboard
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('databarang') ? 'active' : '' }}">
             <a href="{{ route('databarang.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-list-details"></i>
                 Data Barang
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('barang-masuk') ? 'active' : '' }}">
             <a href="{{ route('barang-masuk.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-package-import"></i>
                 Barang Masuk
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('barang-keluar') ? 'active' : '' }}">
             <a href="{{ route('barang-keluar.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-package-export"></i>
                 Barang Keluar
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('laporan') ? 'active' : '' }}">
             <a href="{{ route('laporan.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-clipboard-text"></i>
                 Laporan
             </a>
         </li>
-        <li class="menu-item">
+        <li class="menu-item {{ Request::is('admin') ? 'active' : '' }}">
             <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-user-heart"></i>
                 Admin
             </a>
         </li>
     </ul>
+    <style>
+.menu-item.active > .menu-link {
+  background-color: #a4c7f0ff !important; 
+  color: #fff !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+}
+
+.menu-item.active .menu-icon {
+  color: #fff !important;
+}
+</style>
+
 </aside>

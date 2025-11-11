@@ -127,3 +127,10 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+.menu-item.active a {
+  background-color: hsl(202, 100%, 77%);
+  color: white;
+  border-radius: 10px;
+}
+

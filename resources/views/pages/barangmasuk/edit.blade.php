@@ -23,19 +23,15 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- Pilih Data Barang --}}
+                    {{-- Data Barang --}}
                     <div class="form-group mb-3">
-                        <label for="databarang_id" class="form-label">Data Barang</label>
-                        <select name="databarang_id" id="databarang_id" class="form-control @error('databarang_id') is-invalid @enderror">
-                            @foreach ($databarang as $barang)
-                                <option value="{{ $barang->id }}" {{ $barang->id == old('databarang_id', $barangmasuk->databarang_id) ? 'selected' : '' }}>
-                                    {{ $barang->nama }} ({{ $barang->kode }})
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('databarang_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <label for="databarang" class="form-label">Data Barang</label>
+                        <input type="text"
+                               id="databarang"
+                               class="form-control"
+                               value="{{ $barangmasuk->databarang->nama }} ({{ $barangmasuk->databarang->kode }})"
+                               readonly>
+                        <input type="hidden" name="databarang_id" value="{{ $barangmasuk->databarang_id }}">
                     </div>
 
                     {{-- Jumlah --}}

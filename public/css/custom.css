@@ -1,11 +1,11 @@
-/* Card login background */
+
 .authentication-inner .card {
     background-color: #ffffff !important;
     border-radius: 12px !important;
     box-shadow: 0 6px 18px rgba(0,0,0,0.08) !important;
 }
 
-/* Input email & password */
+
 .form-control {
     border: 1px solid #BBDEFB !important;  
     border-radius: 8px !important;
@@ -17,26 +17,25 @@
     box-shadow: 0 0 0 0.25rem rgba(187, 222, 251, 0.5) !important;
 }
 
-/* Tombol login */
+
 .btn-primary {
     background-color: #BBDEFB !important;  
     border-color: #BBDEFB !important;
-    color: #0d47a1 !important; /* teks lebih gelap biar kontras */
+    color: #0d47a1 !important; 
     font-weight: 600;
 }
 
 .btn-primary:hover {
-    background-color: #90CAF9 !important; /* versi lebih gelap */
+    background-color: #90CAF9 !important; 
     border-color: #90CAF9 !important;
 }
 
-/* Checkbox */
+
 .form-check-input:checked {
     background-color: #BBDEFB !important;
     border-color: #BBDEFB !important;
 }
 
-/* Judul dan teks */
 h4, p {
     color: #333 !important;
 }
@@ -50,3 +49,5 @@ h4, p {
     background-color: #f8d7da;
     color: white;
 }
+
+

@@ -12,11 +12,6 @@ class AdminController extends Controller
     return view('pages.admin.index', compact('admins'));    
 }
 
-public function create()
-{
-    return view('pages.admin.create');
-}
-
 public function store(Request $request)
 {
     $request->validate([

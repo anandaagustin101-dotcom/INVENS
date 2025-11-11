@@ -5,8 +5,9 @@ use App\Http\Controllers\LaporanController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
 
 Auth::routes([
     'register' => false,
@@ -14,6 +15,14 @@ Auth::routes([
     'verify'=> false, 
     'confirm'=> false
 ]);
+
+Route::get('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect('/'); 
+})->name('logout');
 
 Route::group([
     'middleware' => ['auth']
@@ -35,7 +44,7 @@ Route::group([
 
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::POST('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
-
+    
 });
 
 
