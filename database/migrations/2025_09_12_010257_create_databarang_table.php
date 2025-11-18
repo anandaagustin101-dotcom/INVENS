@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('databarang', function (Blueprint $table) {
             $table->id();
-            $table->string('nama',64)->unique();
+            $table->string('nama',64);
             $table->string('kode')->unique();
             $table->smallInteger('jumlah');
             $table->timestamps();

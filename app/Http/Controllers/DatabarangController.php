@@ -23,7 +23,7 @@ class DatabarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'   => 'required|unique:databarang,nama',
+            'nama'   => 'required',
             'kode'   => 'required|unique:databarang,kode',
             'jumlah' => 'required|integer|min:0',
         ]);
@@ -49,7 +49,7 @@ class DatabarangController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama'   => 'required|unique:databarang,nama',
+            'nama'   => 'required',
             'kode'   => 'required|unique:databarang,kode,' . $id,
             'jumlah' => 'required|integer|min:0',
         ]);
