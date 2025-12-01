@@ -42,9 +42,6 @@ Route::group([
 
     Route::resource('/admin',App\Http\Controllers\AdminController::class);
 
-    Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
-    Route::POST('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
-    
 });
 
 

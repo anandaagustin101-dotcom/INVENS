@@ -7,17 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-
-      body, html {
-        height: 100%;
-        font-family: 'Public Sans', sans-serif;
-        overflow: hidden;
-      }
+      body, html { height: 100%; font-family: 'Public Sans', sans-serif; overflow: hidden; }
 
       .authentication-wrapper {
         position: relative;
-        width: 100%;
-        height: 100vh;
+        width: 100%; height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -80,28 +74,13 @@
         padding: 30px 30px 40px;
       }
 
-      .card img {
-        width: 80px;
-        height: 60px;
-      }
-
-      .app-brand-text {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #fff;
-        margin-top: 5px;
-        margin-bottom: 10px;
-      }
-
-      h4, p, label {
-        color: #fff;
-      }
-
+      .card img { width: 80px; height: 60px; }
+      .app-brand-text { font-size: 1.8rem; font-weight: 700; margin-top: 5px; margin-bottom: 10px; }
+      h4, p, label { color: #fff; }
       p { margin-bottom: 20px; }
 
       .form-control {
-        width: 100%;
-        padding: 10px 12px;
+        width: 100%; padding: 10px 12px;
         border-radius: 8px;
         border: 1px solid rgba(255, 255, 255, 0.4);
         background: rgba(255, 255, 255, 0.3);
@@ -110,19 +89,12 @@
 
       .mb-3 { text-align: left; margin-bottom: 15px; }
 
-      .form-check {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 10px;
-      }
+      .form-check { display: flex; align-items: center; gap: 6px; margin-top: 10px; }
 
       .btn-primary {
         margin-top: 15px;
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 10px;
+        width: 100%; padding: 10px;
+        border: none; border-radius: 10px;
         font-weight: 600;
         color: black;
         cursor: pointer;
@@ -135,62 +107,10 @@
         box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
       }
 
-      .top-right-bar {
-        position: absolute;
-        top: 20px;
-        right: 25px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        z-index: 40;
-      }
-
-      .icon-btn {
-        color: white;
-        background: rgba(255,255,255,0.2);
-        border-radius: 10px;
-        padding: 8px 14px;
-        font-size: 18px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      .icon-btn:hover {
-        background: rgba(255,255,255,0.4);
-        transform: scale(1.1);
-      }
-
-      .clock-modal {
+      /* Hapus semua elemen terkait jam */
+          .about-modal {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        background: rgba(255,255,255,0.15);
-        backdrop-filter: blur(10px);
-        border-radius: 50%;
-        width: 250px;
-        height: 250px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: 0.4s ease;
-        z-index: 50;
-        box-shadow: 0 0 25px rgba(255,255,255,0.4);
-      }
-
-      .clock-modal.show {
-        transform: translate(-50%, -50%) scale(1);
-      }
-
-      canvas {
-        width: 200px;
-        height: 200px;
-      }
-
-      .about-modal {
-        position: fixed;
-        top: 50%;
-        left: 50%;
+        top: 50%; left: 50%;
         transform: translate(-50%, -50%) scale(0);
         background: rgba(255,255,255,0.15);
         backdrop-filter: blur(15px);
@@ -204,20 +124,9 @@
         box-shadow: 0 0 25px rgba(255,255,255,0.4);
       }
 
-      .about-modal.show {
-        transform: translate(-50%, -50%) scale(1);
-      }
-
-      .about-modal h3 { 
-        margin-bottom: 10px; 
-        color: #03090eff;
-      }
-
-      .about-modal p {
-        color: black;
-        font-weight: 500;
-      }
-
+      .about-modal.show { transform: translate(-50%, -50%) scale(1); }
+      .about-modal h3 { margin-bottom: 10px; color: #03090eff; }
+      .about-modal p { color: black; font-weight: 500; }
       .close-about {
         margin-top: 15px;
         padding: 8px 14px;
@@ -229,11 +138,7 @@
         transition: 0.3s;
         font-weight: 600;
       }
-
-      .close-about:hover {
-        background: rgba(79, 172, 254, 0.6);
-        color: white;
-      }
+      .close-about:hover { background: rgba(79,172,254,0.6); color: white; }
     </style>
   </head>
 
@@ -242,18 +147,11 @@
       <div class="sparkles"></div>
       <div class="falling-items"></div>
 
-      <div class="top-right-bar">
-        <div class="icon-btn" id="clockBtn">🕒</div>
-        <div class="icon-btn" id="aboutBtn">ℹ️ About</div>
-      </div>
-
-      <div class="clock-modal" id="clockModal">
-        <canvas id="clockCanvas" width="200" height="200"></canvas>
-      </div>
+      <div class="icon-btn" id="aboutBtn" style="position:absolute;top:20px;right:25px;z-index:50;background:rgba(255,255,255,0.2);padding:8px 14px;border-radius:10px;cursor:pointer;">ℹ️ About</div>
 
       <div class="about-modal" id="aboutModal">
         <h3>Tentang Inventify</h3>
-        <p>Inventify adalah sistem manajemen inventaris modern yang membantu memantau dan mengelola barang secara efisien, cepat, dan aman.</p>
+        <p>Inventify adalah sistem manajemen inventaris modern yang membantu memantau dan mengelola barang secara efisien.</p>
         <button class="close-about" id="closeAbout">Tutup</button>
       </div>
 
@@ -307,90 +205,12 @@
         el.style.animationDelay = Math.random() * 3 + 's';
         fallContainer.appendChild(el);
       }
-
-      const clockBtn = document.getElementById("clockBtn");
-      const clockModal = document.getElementById("clockModal");
-      clockBtn.addEventListener("click", () => clockModal.classList.toggle("show"));
-
-      const aboutBtn = document.getElementById("aboutBtn");
+          const aboutBtn = document.getElementById("aboutBtn");
       const aboutModal = document.getElementById("aboutModal");
       const closeAbout = document.getElementById("closeAbout");
+
       aboutBtn.addEventListener("click", () => aboutModal.classList.add("show"));
       closeAbout.addEventListener("click", () => aboutModal.classList.remove("show"));
-
-      const canvas = document.getElementById("clockCanvas");
-      const ctx = canvas.getContext("2d");
-      const radius = canvas.height / 2;
-      ctx.translate(radius, radius);
-
-      function drawClock() {
-        ctx.clearRect(-radius, -radius, canvas.width, canvas.height);
-        drawFace(ctx, radius);
-        drawNumbers(ctx, radius);
-        drawTime(ctx, radius);
-      }
-
-      function drawFace(ctx, radius) {
-        ctx.beginPath();
-        ctx.arc(0, 0, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = "rgba(79, 172, 254, 0.15)";
-        ctx.fill();
-        ctx.strokeStyle = "#4facfe";
-        ctx.lineWidth = 6;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(0, 0, 5, 0, 2 * Math.PI);
-        ctx.fillStyle = "#4facfe";
-        ctx.fill();
-      }
-
-      function drawNumbers(ctx, radius) {
-        ctx.font = radius * 0.15 + "px Arial";
-        ctx.textBaseline = "middle";
-        ctx.textAlign = "center";
-        ctx.fillStyle = "#050b0fff";
-        for (let num = 1; num <= 12; num++) {
-          const ang = num * Math.PI / 6;
-          ctx.rotate(ang);
-          ctx.translate(0, -radius * 0.8);
-          ctx.rotate(-ang);
-          ctx.fillText(num.toString(), 0, 0);
-          ctx.rotate(ang);
-          ctx.translate(0, radius * 0.8);
-          ctx.rotate(-ang);
-        }
-      }
-
-      function drawTime(ctx, radius) {
-        const now = new Date();
-        let hour = now.getHours();
-        let minute = now.getMinutes();
-        let second = now.getSeconds();
-
-        hour = hour % 12;
-        hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60));
-        drawHand(ctx, hour, radius * 0.5, 6, "#4facfe");
-
-        minute = (minute * Math.PI / 30);
-        drawHand(ctx, minute, radius * 0.75, 4, "#4facfe");
-
-        second = (second * Math.PI / 30);
-        drawHand(ctx, second, radius * 0.85, 2, "#ff4757");
-      }
-
-      function drawHand(ctx, pos, length, width, color="#fff") {
-        ctx.beginPath();
-        ctx.lineWidth = width;
-        ctx.lineCap = "round";
-        ctx.strokeStyle = color;
-        ctx.moveTo(0, 0);
-        ctx.rotate(pos);
-        ctx.lineTo(0, -length);
-        ctx.stroke();
-        ctx.rotate(-pos);
-      }
-
-      setInterval(drawClock, 1000);
     </script>
   </body>
 </html>

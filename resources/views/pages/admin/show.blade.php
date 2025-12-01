@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h3 class="page-title">Detail Karyawan</h3>
+            <h3 class="page-title">Detail Admin</h3>
             
             <div class="card card-body">
                 <table class="table table-striped">

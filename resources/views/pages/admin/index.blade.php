@@ -1,14 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Halaman Admin')
+@section('title', 'Halaman Profil')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h3 class="page-title">Halaman Admin</h3>
-
-            
-                
+            <h3 class="page-title">Halaman Profil</h3>
 
                 <div class="card card-body">
                     <table class="table table-striped dataTable">

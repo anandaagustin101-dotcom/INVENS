@@ -67,7 +67,7 @@
         <li class="menu-item {{ Request::is('admin') ? 'active' : '' }}">
             <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-user-heart"></i>
-                Admin
+                Profil
             </a>
         </li>
     </ul>

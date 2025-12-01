@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container">
-    {{-- Kotak Ringkasan --}}
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card text-center shadow-sm card-hover" style="background-color: #9CCDf4; color: #fff; min-height: 100px;">
@@ -35,7 +34,6 @@
         </div>
     </div>
 
-    {{-- Barang Hampir Habis --}}
     <div class="card shadow-sm mt-4 mb-4" style="background-color: #9CCDf4; border-left: 5px solid #BBDEFB;">
         <div class="card-header" style="background-color: #BBDEFB; color: #0e0c0cff; font-weight: bold;">
             Barang Hampir Habis
@@ -56,7 +54,6 @@
         </div>
     </div>
 
-    {{-- Grafik --}}
     <div class="card shadow-sm" style="background-color: #ffffff; color: #BBDEFB ;">
         <div class="card-header" style="background-color: #BBDEFB; color: #0e0c0cff;">
             Grafik Stok Barang
